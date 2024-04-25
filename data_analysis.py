@@ -33,6 +33,25 @@ def analyze_pcap(pcap_file, gaurd_relay_ip):
 
             return df, stats
         
+def main (pcap_file, gaurd_relay_ip):
+    df, stats = analyze_pcap(pcap_file, gaurd_relay_ip)
+    excel_file = 'pcap_analysis.xlsx'
+
+    if os.path.exists(excel_file):
+        with pd.ExcelWriter(excel_file, mode='a') as writer:
+            df.to_excel(writer, sheet_name='pcap_data', index=False)
+            pd.Series(stats).to_frame('value').to_excel(writer, sheet_name='stats')
+    else:
+        with pd.ExcelWriter(excel_file) as writer:
+            df.to_excel(writer, sheet_name='pcap_data', index=False)
+            pd.Series(stats).to_frame('value').to_excel(writer, sheet_name='stats')
+
+    print(df)
+    print(stats)
+
+    print(f"Statistics Saved to Excel: {excel_file}")
+    print(pd.DataFrame([stats]))
+        
 if __name__ == '__main__':
     if len(sys.argv) != 3:
         print('Usage: python data_analysis.py <pcap_file> <gaurd_relay_ip>')
