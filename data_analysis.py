@@ -46,10 +46,6 @@ def main (pcap_file, gaurd_relay_ip):
             df.to_excel(writer, sheet_name='Packet Data', index=False)
             pd.DataFrame([stats]).to_excel(writer, sheet_name='Statistics', index=False)
 
-    # Print stats to console
-    print(f"Statistics Saved to Excel: {excel_file}")
-    print(pd.DataFrame([stats]))
-
     print(df)
     print(stats)
 
