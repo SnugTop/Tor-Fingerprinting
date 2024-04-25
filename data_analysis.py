@@ -37,24 +37,25 @@ def analyze_pcap(pcap_file, gaurd_relay_ip):
 
     return df, stats
         
-def main (pcap_file, gaurd_relay_ip):
-    df, stats = analyze_pcap(pcap_file, gaurd_relay_ip)
-    excel_file = 'pcap_analysis.xlsx'
+def main (directory_path, gaurd_relay_ip):
+    for filename in os.listdir(directory_path):
+        if filename.endswith('.pcap'):
+            pcap_file = os.path.join(directory_path, filename)
+            df, stats = analyze_pcap(pcap_file, gaurd_relay_ip)
+            excel_file = 'pcap_analysis.xlsx'
 
-    if os.path.exists(excel_file):
-        with pd.ExcelWriter(excel_file, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
-            df.to_excel(writer, sheet_name='Packet Data', index=False, startrow=writer.sheets['Packet Data'].max_row, header=False)
-            pd.DataFrame([stats]).to_excel(writer, sheet_name='Statistics', index=False, startrow=writer.sheets['Statistics'].max_row, header=False)
-    else:
-        with pd.ExcelWriter(excel_file, engine='openpyxl') as writer:
-            df.to_excel(writer, sheet_name='Packet Data', index=False)
-            pd.DataFrame([stats]).to_excel(writer, sheet_name='Statistics', index=False)
+            if os.path.exists(excel_file):
+                with pd.ExcelWriter(excel_file, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
+                    df.to_excel(writer, sheet_name='Packet Data', index=False, startrow=writer.sheets['Packet Data'].max_row, header=False)
+                    pd.DataFrame([stats]).to_excel(writer, sheet_name='Statistics', index=False, startrow=writer.sheets['Statistics'].max_row, header=False)
+            else:
+                with pd.ExcelWriter(excel_file, engine='openpyxl') as writer:
+                    df.to_excel(writer, sheet_name='Packet Data', index=False)
+                    pd.DataFrame([stats]).to_excel(writer, sheet_name='Statistics', index=False)
+            
+            print(f"Processed {filename} and updated {excel_file}")
 
-    print(df)
-    print(stats)
-
-    print(f"Statistics Saved to Excel: {excel_file}")
-    print(pd.DataFrame([stats]))
+    
         
 if __name__ == '__main__':
     if len(sys.argv) != 3:
