@@ -4,8 +4,6 @@ import pandas as pd
 from scapy.all import rdpcap
 from decimal import Decimal
 
-
-
 def analyze_pcap(pcap_file, gaurd_relay_ip):
     packets = rdpcap(pcap_file)
     data = []
@@ -23,8 +21,12 @@ def analyze_pcap(pcap_file, gaurd_relay_ip):
     df = pd.DataFrame(data, columns=['timestamp', 'src', 'dst', 'direction', 'size'])
     df['size'] = df['size'].astype(float)
     df['Time Interval'] = df['timestamp'].diff().astype(float)
-
+    
+    filename = os.path.basename(pcap_file)
+    website_name = filename.split('_')[0]
+    
     stats = {
+        'Website': website_name,
         'Mean Packet Size': df['size'].mean(),
         'Median Packet Size': df['size'].median(),
         'Std Packet Size': df['size'].std(),
