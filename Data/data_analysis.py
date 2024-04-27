@@ -10,7 +10,7 @@ def analyze_pcap(pcap_file, gaurd_relay_ip):
 
     for packet in packets:
         if 'IP' in packet:
-            size = len(packet)
+            size = len(packet)#becareful here it is not packet['IP'].len Check wireshark. 
             src = packet['IP'].src
             dst = packet['IP'].dst
             timestamp = float(packet.time)
