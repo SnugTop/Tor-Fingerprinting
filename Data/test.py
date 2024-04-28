@@ -13,7 +13,7 @@ def analyze_pcap(pcap_file, guard_relay_ip):
             src = packet['IP'].src
             dst = packet['IP'].dst
             timestamp = float(packet.time)
-            direction = 'incoming' if src == guard_relay_ip else 'outgoing'
+            direction = 'incoming' if src in guard_relay_ip else 'outgoing'
             data.append([timestamp, src, dst, direction, size])
 
     df = pd.DataFrame(data, columns=['timestamp', 'src', 'dst', 'direction', 'size'])
@@ -39,7 +39,7 @@ def load_model_and_scaler(model_path, scaler_path):
     return knn_model, scaler
 
 def main(directory_path):
-    guard_relay_ip = '85.208.144.164' 
+    guard_relay_ip = ['85.208.144.164', '185.220.101.201'] 
     model_path = 'knn_model.joblib'
     scaler_path = 'scaler.joblib'
     knn_model, scaler = load_model_and_scaler(model_path, scaler_path)
