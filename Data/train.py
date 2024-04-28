@@ -12,7 +12,7 @@ def load_and_preprocess_data(filepath):
     return X_scaled, y, scaler
 
 
-def train_knn(X, y, scaler, k=5):  
+def train_knn(X, y, scaler, k=4):  
     knn = KNeighborsClassifier(n_neighbors=k)
     knn.fit(X, y)
     return knn, scaler  

@@ -10,11 +10,11 @@ def analyze_pcap(pcap_file, gaurd_relay_ip):
 
     for packet in packets:
         if 'IP' in packet:
-            size = len(packet)#becareful here it is not packet['IP'].len Check wireshark. 
+            size = len(packet)
             src = packet['IP'].src
             dst = packet['IP'].dst
             timestamp = float(packet.time)
-            direction = 'incoming' if src == gaurd_relay_ip else 'outgoing'
+            direction = 'incoming' if src in gaurd_relay_ip else 'outgoing'
             data.append([timestamp, src, dst, direction, size])
 
 
@@ -39,7 +39,8 @@ def analyze_pcap(pcap_file, gaurd_relay_ip):
 
     return df, stats
         
-def main (directory_path, gaurd_relay_ip):
+def main (directory_path):
+    gaurd_relay_ip = ['85.208.144.164', '185.220.101.201']
     for filename in os.listdir(directory_path):
         if filename.endswith('.pcap'):
             pcap_file = os.path.join(directory_path, filename)
@@ -56,14 +57,12 @@ def main (directory_path, gaurd_relay_ip):
                     pd.DataFrame([stats]).to_excel(writer, sheet_name='Statistics', index=False)
             
             print(f"Processed {filename} and updated {excel_file}")
-
     
         
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        print('Usage: python data_analysis.py <pcap_file> <gaurd_relay_ip>')
+    if len(sys.argv) != 2:
+        print('Usage: python data_analysis.py <pcap_file>')
         sys.exit(1)
 
     pcap_file = sys.argv[1]
-    guard_relay_ip = sys.argv[2]
-    main(pcap_file, guard_relay_ip)
+    main(pcap_file)
