@@ -1,0 +1,23 @@
+# Network Traffic Analysis Toolset
+
+This repository contains tools for analyzing network traffic captured in PCAP files to classify and predict web activities based on traffic patterns. These tools use Python for data extraction, analysis, and machine learning to identify characteristics of different websites visited through Tor networks.
+
+## Components
+
+- **data_analysis.py**: Extracts packet information from PCAP files, determines the direction of traffic based on known guard relay IPs, and stores statistical analysis in an Excel file.
+- **train.py**: Trains a K-Nearest Neighbors (KNN) classifier to predict the website based on network traffic characteristics.
+- **test.py**: Predicts the website from new PCAP files using the trained KNN model.
+
+## Dependencies
+
+- Python 3.7+
+- pandas
+- scapy
+- joblib
+- sklearn
+
+You can install these dependencies using pip:
+
+```bash
+pip install pandas scapy joblib scikit-learn
+```
