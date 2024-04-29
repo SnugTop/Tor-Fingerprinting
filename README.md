@@ -11,15 +11,24 @@ This repository contains tools for analyzing network traffic captured in PCAP fi
 ## Dependencies
 
 - Python 3.7+
-- pandas
+- pandas (If using google cloud you may need version )
 - scapy
 - joblib
 - sklearn
+- openpyxl
+
+If using google cloud virtual machien you will need to run a python virtual enviroment to install these dependancies.
+
+```bash
+sudo apt install python3-venv
+python3 -m venv myenv
+source myenv/bin/activate
+```
 
 You can install these dependencies using pip:
 
 ```bash
-pip install pandas scapy joblib scikit-learn
+pip install pandas scapy joblib scikit-learn openpyxl
 ```
 
 # Setup and Excecution
