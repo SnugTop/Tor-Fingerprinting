@@ -88,7 +88,11 @@ Output predictions for each file to the terminal. It will run for all five files
 
 # Why KNN and Choice of K
 
-I chose the KNN algorithm for its effectiveness in classification problems the data sets are not big enough for other methods. I chose the number 4 for K because it gives us the best balance when making these comparisons. If we pick a number that's too high, we might include too many neighbors that aren't similar(noise). But if we pick a number that's too low, we might not get enough information to make a good decision. The number 4 seemed to work best in our tests to keep things just right.
+I chose the KNN algorithm for its effectiveness in classification problems the data sets are not big enough for other methods. I chose the number 4 for K because it gives us the best balance when making these comparisons. If I pick a number that's too high, it might include too many neighbors that aren't similar(noise). But if I pick a number that's too low, it might not get enough information to make a good decision. The number 4 seemed to work best in our tests to keep things just right.
+
+# Decision Making
+
+The Tor website fingerprinting program determines the visited website by analyzing .pcap files to extract key traffic features such as packet sizes and timing intervals. These features are statistically processed to identify patterns of different websites. These patters are then trained on a model and then tested. When testing with new .pcap files the program is comparing to these developed traffic patterns and using the KNN model to make a decison best matching these traffic patterns.
 
 # Advantages Over Random Guessing
 
