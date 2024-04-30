@@ -41,9 +41,7 @@ Run data_analysis.py to parse PCAP files and generate a dataset:
 python data_analysis.py <directory_path_containing_pcap_files>
 ```
 
-directory for pcaps to be analyze is "pcaps" in this file but may be whatever you name it.
-
-IMPORTAN: (This may take a minute to process all the files. It took much longer (3 minutes) when I ran it in Google Cloud as opposed to a matter of seconds on my own machine.)
+directory for pcaps to be analyze is "pcaps" in this repo, but may be whatever you name it.
 
 This script will:
 
@@ -51,7 +49,7 @@ Analyze packets to determine if they are incoming or outgoing based on a list of
 Compute statistics such as mean packet size and total bytes.
 Save these statistics to pcap_analysis.xlsx.
 
-In pcap_analysis.xlsx I recorded both the statics and all the traffic. There are two sheets "Packet Data" and "Statistics". "Packet Data" was mainly used to sanity check the data that was being used for the statistics. The "statistics" are the only data used in training the model.
+I commented out two lines of code that recored the packet data as well in the excel. It can be recorded in a sheet called "Packet Data" as sanity check to make sure the data is being recorded correctly. It slows down the process and is uneccessary so it is not needed.The "statistics" are the only data used in training the model.
 
 For statistics I chose Mean Packet Size, Median Packet Size, Standard Dev in Packet Size, Mean Time Interval, Median Time Interval, Std Deviation Time Interval, Total Packets, and Total Bytes.
 
@@ -79,7 +77,7 @@ Use test.py to predict the website from new PCAP files:
 python test.py <directory_path_containing_test_files>
 ```
 
-The directory for pcaps used for testing is "tests" in this file but may be whatever you name it.
+The directory for pcaps used for testing is "tests" in this repo, but may be whatever you name it.
 
 This script will:
 

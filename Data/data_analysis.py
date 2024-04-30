@@ -49,11 +49,13 @@ def main (directory_path):
 
             if os.path.exists(excel_file):
                 with pd.ExcelWriter(excel_file, engine='openpyxl', mode='a', if_sheet_exists='overlay') as writer:
-                    df.to_excel(writer, sheet_name='Packet Data', index=False, startrow=writer.sheets['Packet Data'].max_row, header=False)
+                    #Used this line as a sanity check to make sure data was recoded correctly
+                    #df.to_excel(writer, sheet_name='Packet Data', index=False, startrow=writer.sheets['Packet Data'].max_row, header=False)
                     pd.DataFrame([stats]).to_excel(writer, sheet_name='Statistics', index=False, startrow=writer.sheets['Statistics'].max_row, header=False)
             else:
                 with pd.ExcelWriter(excel_file, engine='openpyxl') as writer:
-                    df.to_excel(writer, sheet_name='Packet Data', index=False)
+                    #Used this line as a sanity check to make sure data was recoded correctly
+                    #df.to_excel(writer, sheet_name='Packet Data', index=False)
                     pd.DataFrame([stats]).to_excel(writer, sheet_name='Statistics', index=False)
             
             print(f"Processed {filename} and updated {excel_file}")
