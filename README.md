@@ -97,3 +97,11 @@ The Tor website fingerprinting program determines the visited website by analyzi
 # Advantages Over Random Guessing
 
 Using KNN and feature engineering (e.g., packet sizes, timing intervals) allows the system to identify patterns in traffic data in a more reliable manner compared to random guessing. By leveraging historical data and machine learning, the tool can notice subtle distinctions between different types of traffic, leading to higher accuracy and better network traffic insights.
+
+# Sources
+
+- https://joblib.readthedocs.io/en/stable/
+- https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
+- https://pandas.pydata.org/docs/user_guide/index.html
+- https://scapy.readthedocs.io/en/latest/usage.html
+- https://incognitjoe.github.io/reading-pcap-with-scapy.html
